@@ -10,8 +10,11 @@ jobs:
       # ✅ Checkout code
       - uses: actions/checkout@v3
 
-      # ✅ Debug: List directory contents to verify checkout
-      - name: List directory contents
+      # ✅ Debug: Print working directory
+      - name: Print working directory
+        run: pwd
+
+      # ✅ Debug: List directory contents
         run: ls -la
 
       # ✅ Set up Node.js
@@ -23,10 +26,12 @@ jobs:
       # ✅ Install dependencies
       - name: Install dependencies
         run: npm install
+        working-directory: .  # Explicitly set to current directory
 
       # ✅ Run tests and save report
       - name: Run tests
         run: npm test > test-report.txt
+        working-directory: .
 
       # ✅ Upload artifact
       - name: Upload test report
