@@ -15,7 +15,7 @@ jobs:
       - run: npm install
       - run: npm test > test-report.txt
       - name: Upload test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # ✅ Use the latest version
         with:
           name: test-report
           path: test-report.txt
