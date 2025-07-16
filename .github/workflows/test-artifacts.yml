@@ -15,6 +15,7 @@ jobs:
         run: pwd
 
       # ✅ Debug: List directory contents
+      - name: List directory contents
         run: ls -la
 
       # ✅ Set up Node.js
