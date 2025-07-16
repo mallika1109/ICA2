@@ -4,39 +4,32 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner: [self-hosted, windows-latest, ubuntu-latest]
 
     steps:
-      # ✅ Checkout code
+      # Checkout code
       - uses: actions/checkout@v3
 
-      # ✅ Debug: Print working directory
-      - name: Print working directory
-        run: pwd
-
-      # ✅ Debug: List directory contents
-      - name: List directory contents
-        run: ls -la
-
-      # ✅ Set up Node.js
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # ✅ Install dependencies
+      # Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: .  # Explicitly set to current directory
 
-      # ✅ Run tests and save report
+      # Run tests and save report
       - name: Run tests
-        run: npm test > test-report.txt
-        working-directory: .
+        run: npm test -- --json --outputFile=test-report.json
 
-      # ✅ Upload artifact
+      # Upload artifact
       - name: Upload test report
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
-          path: test-report.txt
+          name: test-report-${{ matrix.runner }}
+          path: test-report.json
