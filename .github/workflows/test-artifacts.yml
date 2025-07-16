@@ -1,4 +1,4 @@
-name: Run Tests and Save Artifacts
+name: Run Tests and Store Artifacts
 
 on: [push, pull_request]
 
