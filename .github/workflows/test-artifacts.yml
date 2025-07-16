@@ -26,6 +26,7 @@ jobs:
       # Run tests and save report
       - name: Run tests
         run: npm test -- --json --outputFile=test-report.json
+        
 
       # Upload artifact
       - name: Upload test report
