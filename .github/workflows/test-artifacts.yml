@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ✅ Check out your code directly into the root directory
+      # ✅ Checkout code to working directory
       - uses: actions/checkout@v3
         with:
           path: ./
@@ -19,16 +19,16 @@ jobs:
           node-version: '18'
 
       # ✅ Install dependencies
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      # ✅ Run tests and store the output
-      - name: Run Tests
+      # ✅ Run tests and save report
+      - name: Run tests
         run: npm test > test-report.txt
 
-      # ✅ Upload the test report as an artifact
-      - name: Upload Test Report
-        uses: actions/upload-artifact@v3
+      # ✅ Upload artifact using latest supported version
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: test-report.txt
