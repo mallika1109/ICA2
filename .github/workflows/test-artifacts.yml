@@ -7,10 +7,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ✅ Checkout code to working directory
+      # ✅ Checkout code
       - uses: actions/checkout@v3
-        with:
-          path: ./
+
+      # ✅ Debug: List directory contents to verify checkout
+      - name: List directory contents
+        run: ls -la
 
       # ✅ Set up Node.js
       - name: Set up Node.js
@@ -26,7 +28,7 @@ jobs:
       - name: Run tests
         run: npm test > test-report.txt
 
-      # ✅ Upload artifact using latest supported version
+      # ✅ Upload artifact
       - name: Upload test report
         uses: actions/upload-artifact@v4
         with:
